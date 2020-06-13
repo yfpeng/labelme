@@ -1,5 +1,6 @@
 import base64
 import io
+from io import open
 import json
 import os.path as osp
 
@@ -72,7 +73,7 @@ class LabelFile(object):
             'flags',
         ]
         try:
-            with open(filename, 'rb' if PY2 else 'r') as f:
+            with open(filename, 'rb' if PY2 else 'r', encoding="utf-8") as f:
                 data = json.load(f)
             version = data.get('version')
             if version is None:
@@ -183,7 +184,7 @@ class LabelFile(object):
             assert key not in data
             data[key] = value
         try:
-            with open(filename, 'wb' if PY2 else 'w') as f:
+            with open(filename, 'wb' if PY2 else 'w', encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
             self.filename = filename
         except Exception as e:

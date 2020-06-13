@@ -1,4 +1,5 @@
 import base64
+import datetime
 import io
 import json
 import os.path as osp
@@ -178,6 +179,7 @@ class LabelFile(object):
             imageData=imageData,
             imageHeight=imageHeight,
             imageWidth=imageWidth,
+            last_modified_time=f'.{datetime.datetime.now():%Y-%m-%d-%H-%M-%S}'
         )
         for key, value in otherData.items():
             assert key not in data
